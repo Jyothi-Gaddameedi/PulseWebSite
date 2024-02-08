@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Login() {
   return (
 
-    <div>
-        <form>
+<div className='App'>
+      <form>
           
          <h1 class="v">Login</h1>
       
@@ -24,9 +25,17 @@ function Login() {
           <div>
             <input class="b" type="submit" value="Login"/>
         </div>
-         
+         <Link to="/signup">Signup</Link>
        </form>
-    </div>
+
+      
+        </div>
+        
+
+
+    
+    
+  
   )
 }
 
