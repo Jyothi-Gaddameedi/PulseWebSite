@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
+import TopNavigation from './TopNavigation';
+import { IoHome } from 'react-icons/io5';
+import { NavLink } from 'react-router-dom';
 function EditProfile() {
 
   let firstNameInputRef=useRef();
@@ -42,7 +45,7 @@ function EditProfile() {
       body:dataToSend,
     };
     
-    let JSONData=await fetch("http://localhost:1234/signup",reqOptions);
+    let JSONData=await fetch("http://localhost:1234/editProfile",reqOptions);
     let JSOData=await JSONData.json();
   if(JSOData.status==="Failure"){
     alert(JSOData.msg);
@@ -53,9 +56,20 @@ function EditProfile() {
   }
   return (
     <div className='App'>
- <form>
+      <div className='pulsediv'> 
+    <div className='pulsebrn'>
+      <h2><strong className='pulse'>Pulse.</strong><strong className='b'>B</strong><strong className='r'>R</strong><strong className='n'>n</strong></h2>
+    </div>
+      
+  </div>
+    <TopNavigation/>
+   <div>
+    <NavLink to="/home"><IoHome/> Home</NavLink>
+    </div>
+    
+ <form className='signupForm'>
       <div>
-           <h2>Signup</h2>
+           <h2>EditProfile</h2>
       </div>
       <div>
         <input ref={firstNameInputRef} className="login" placeholder="First Name"/>
@@ -121,7 +135,7 @@ function EditProfile() {
               sendSignupDataToServerFormData();
 
            }}
-           className='button' type='button'>Sign Up</button>
+           className='button' type='button'>Update Profile</button>
         </div>
         </form>
     </div>

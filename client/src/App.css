@@ -44,7 +44,7 @@ select{
   display: flex;
   justify-content: center;
 }
-.navLogin{
+.navLink{
   font-size: 1.3rem;
   color:blue;
   text-decoration: none;

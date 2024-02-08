@@ -1,11 +1,18 @@
 import React from 'react'
 
 import TopNavigation from './TopNavigation';
+import { NavLink } from 'react-router-dom';
 
-import NavLink from 'react-bootstrap/esm/NavLink';
+
 
 
 function Settings() {
+  let activeLink=(obj)=>{
+    if(obj.isActive===true){
+      return ({color:"violet"})
+    }
+  }
+ 
   return (
     <div>
       <div className='pulsediv'> 
@@ -15,7 +22,8 @@ function Settings() {
   </div>
  <TopNavigation/>
   
-  <NavLink to="/editProfile"></NavLink>
+  <NavLink style={(obj)=>{return activeLink(obj)
+      }}  to="/editProfile" className="navLink">EditProfile</NavLink>
     </div>
   )
 }

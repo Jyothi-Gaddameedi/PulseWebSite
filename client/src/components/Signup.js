@@ -121,7 +121,7 @@ function Signup() {
       <p>Already have an account?</p>
       <NavLink style={(obj)=>{return activeLink(obj)
       }}
-       to="/" className="navLogin">Login</NavLink>
+       to="/" className="navLink">Login</NavLink>
       </div>
       </form>
     </div>

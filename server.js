@@ -72,7 +72,20 @@ app.post("/signup",upload.single("profilePic"),async(req,res)=>{
     res.json({status:"Failure",msg:"Unable create User"});
   }  
 });
+app.post("/validateLogin",upload.none(),async(req,res)=>{
+  console.log(req.body);
+let userData=await User.find().and({email:req.body.email}) ;
 
+if(userData.length>0){
+ if(req.body.password===userData[0].password){
+   res.json({status:"Success",data:userData})
+  }else{
+    res.json({status:"Failure",msg:"Invalid password"});
+  }
+}else{
+res.json({status:"Failure",msg:"Invalid Username"});
+}
+});
 
 app.listen("1234",()=>{
     console.log("Listening port 1234");
