@@ -1,9 +1,13 @@
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Signup() {
-   // let navigate=useNavigate();
-    //let dispatch=useDispatch();
+  let activeLink=(obj)=>{
+    if(obj.isActive===true){
+      return ({color:"violet"})
+    }
+  }
+  let navigate=useNavigate();
 
   let firstNameInputRef=useRef();
   let lastNameInputRef=useRef();
@@ -12,6 +16,7 @@ function Signup() {
   let profilePicInputRef=useRef();
   let emailInputRef=useRef();
   let passwordInputRef=useRef();
+  let stateSelectInputRef=useRef();
   let [profilePicURL,setProfilePicURL]=useState("./images/Profile-pic.jpg");
 
   let sendSignupDataToServerFormData=async()=>{
@@ -26,27 +31,25 @@ function Signup() {
         }
         dataToSend.append("email",emailInputRef.current.value);
         dataToSend.append("password",passwordInputRef.current.value);
-      
+        dataToSend.append("state",stateSelectInputRef.current.value);
     let reqOptions={
       method:"POST",
       body:dataToSend,
     };
     
-    let JSONData=await fetch("http://localhost:5555/signup",reqOptions);
+    let JSONData=await fetch("http://localhost:1234/signup",reqOptions);
     let JSOData=await JSONData.json();
   if(JSOData.status==="Failure"){
     alert(JSOData.msg);
   }else{
-    //dispatch({type:"signup",data:JSOData.data})
-    //navigate("/");
+    navigate("/");
   }
-    
-     console.log(JSOData);
+    console.log(JSOData);
   }
  
   return (
     <div className='App'>
-        <form>
+        <form className='signupForm'>
       <div>
            <h2>Signup</h2>
       </div>
@@ -63,33 +66,34 @@ function Signup() {
         <input ref={cityInputRef} className="login" placeholder="City/Town"/>
       </div>
       <div>
-            <select className='login'>
-                <option value="choose your state">choose your state</option>
+            <select type="select" ref={stateSelectInputRef} className='login'
+      
+            >
+                <option>Choose your state</option>
                 <option value="AP">Andhra pradesh</option>
                 <option>Telangana</option>
                 <option value="MP">Madhya pradesh</option>
                 <option value="UP">Uttar pradesh</option>
             </select>
         </div>
-        <div>
+        {/* <div>
             <select className='login'>
-                <option>choose Gender</option>
+                <option>Choose Gender</option>
                 <option>Male</option>
                 <option>Female</option>
             </select>
-        </div>
+        </div> */}
         <div>
-          <label>profilePic</label>
-          <br></br>
-          <br></br>
-          <input ref={profilePicInputRef} className='login' type="file" 
+          <label>ProfilePic</label>
+          <br/><br/>
+          <input ref={profilePicInputRef} className='login' type="file"
           onChange={()=>{
             let selectedImageURL=URL.createObjectURL(profilePicInputRef.current.files[0])
 
             setProfilePicURL(selectedImageURL)
           }}
           />
-          <br></br>
+          <br/><br/>
           <img className='profilepic' src={profilePicURL} alt=''></img>
           <br></br>
           <br></br>
@@ -99,10 +103,10 @@ function Signup() {
           <h4>Enter your account details:</h4>
         </div>
         <div>
-          <input ref={emailInputRef} className="login" type="email" placeholder="email Address"/> 
+          <input ref={emailInputRef} className="login" type="email" placeholder="Email Address"/> 
         </div>
         <div>
-           <input ref={passwordInputRef} className="login" type="password" placeholder="password"/>
+           <input ref={passwordInputRef} className="login" type="password" placeholder="Password"/>
         </div>
         <div>
            <button 
@@ -110,12 +114,17 @@ function Signup() {
               sendSignupDataToServerFormData();
 
            }}
-           className='button' type='button'>Submit</button>
+           className='button' type='button'>Sign Up</button>
         </div>
+        
+      <div className='link'>
+      <p>Already have an account?</p>
+      <NavLink style={(obj)=>{return activeLink(obj)
+      }}
+       to="/" className="navLogin">Login</NavLink>
+      </div>
       </form>
-      <br/>
-      <Link to="/">Login</Link>
-  </div>
+    </div>
     
   )
 }

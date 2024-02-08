@@ -2,17 +2,15 @@
   text-align: center;
 }
 
-form{
+.signupForm{
   display:inline-block;
   margin: 20px;
   padding: 20px;
 }
-body{
-  background-color: dimgray;
-}
-form div{
+.signupForm div{
   background-color:rgb(244, 240, 240);
-  padding: 30px 20px 50px 20px;
+  padding: 10px 80px 10px 80px;
+  background-color: rgb(226, 223, 223);
   }
 .login{
   border-radius: 5px;
@@ -21,7 +19,7 @@ form div{
   width: 250px;
   height: 30px;
   font-size: medium;
-  color: rgb(11, 11, 12);
+  color: rgb(16, 16, 16);
 } 
 .profilepic{
   width: 150px;
@@ -31,7 +29,8 @@ form div{
   object-fit: contain;
 }
 .button{
-  width: 70px;
+  width: 170px;
+  font-size: 1.2rem;
   border-color: rgb(152, 152, 152);
   background-color: rgb(186, 186, 188);
 }
@@ -41,5 +40,55 @@ select{
   height: 30px;
   font-size: 1rem;
 }
+.link{
+  display: flex;
+  justify-content: center;
+}
+.navLogin{
+  font-size: 1.3rem;
+  color:blue;
+  text-decoration: none;
+}
+.pulsediv{
+  background-color:rgb(42,54,66);
+}
+.pulsebrn{
+  height: 60px;
+  display: flex; 
+  justify-content:space-between;
+  align-items:flex-start;
+}
+.pulse{
+  font-family:sans-serif;
+  color:white;
+  padding-left: 15px;
 
+ }
+ .b{
+  color:rgb(224,59,43);
+ }
+ .r{
+  color:rgb(162,161,166);
+ }.n{
 
+  color:rgb(224,59,43);
+  font-family: monospace;
+  font-size: 2.6rem;
+ }
+.name{
+  color: white;
+  padding:15px;
+}
+.img1{
+  box-shadow: 2px 2px 30px gray;
+  border:2px solid white;
+  width:300px;
+  
+}
+.me-auto{
+  font-size: 1.5rem;
+ 
+}
+.sImg{
+  width: 35px;
+}
