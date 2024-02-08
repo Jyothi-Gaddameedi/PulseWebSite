@@ -2,11 +2,32 @@ import React from 'react'
 
 function Login() {
   return (
+
     <div>
-        <h2>login</h2>
-        <h2>Signup</h2>
+        <form>
+          
+         <h1 class="v">Login</h1>
+      
+         <div>
+         <input class="login" type="email" placeholder="email Address"/>
+         </div>
+  <br/>
+
+         <div>
+         <input class="login" type="password" placeholder="password"/>
+         </div>
+         
+         <div>
+            <a class="form" href="#">Forgot Password?</a>
+         </div>
+  <br/>
+          <div>
+            <input class="b" type="submit" value="Login"/>
+        </div>
+         
+       </form>
     </div>
   )
 }
 
-export default Login
+export default Login;
