@@ -117,11 +117,11 @@ function Signup() {
            className='button' type='button'>Sign Up</button>
         </div>
         
-      <div className='link'>
+      <div><hr></hr>
       <p>Already have an account?</p>
       <NavLink style={(obj)=>{return activeLink(obj)
       }}
-       to="/" className="navLink">Login</NavLink>
+       to="/" className="logLink">Login</NavLink>
       </div>
       </form>
     </div>

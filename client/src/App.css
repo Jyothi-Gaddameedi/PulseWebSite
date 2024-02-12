@@ -22,8 +22,8 @@
   color: rgb(16, 16, 16);
 } 
 .profilepic{
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 200px;
   border: 2px solid rgb(147, 139, 139);
   background-color: rgb(110, 125, 141);
   object-fit: contain;
@@ -40,14 +40,23 @@ select{
   height: 30px;
   font-size: 1rem;
 }
-.link{
-  display: flex;
-  justify-content: center;
-}
 .navLink{
-  font-size: 1.3rem;
+  color:rgb(181, 181, 181);
+  text-decoration: none;
+  font-size: 1.5rem;
+  padding: 15px 0px 15px 20px;
+}
+.logLink{
   color:blue;
   text-decoration: none;
+  font-size: 1.5rem;
+
+}
+.setLink{
+  color:rgb(12, 19, 98);
+  text-decoration: none;
+  font-size: 1.5rem;
+  padding: 15px;
 }
 .pulsediv{
   background-color:rgb(42,54,66);
@@ -85,10 +94,13 @@ select{
   width:300px;
   
 }
-.me-auto{
-  font-size: 1.5rem;
- 
-}
+
 .sImg{
   width: 35px;
+}
+
+nav{
+  padding: 15px 0px 15px 20px;
+  background-color:black;
+
 }

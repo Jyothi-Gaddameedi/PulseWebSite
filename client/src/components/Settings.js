@@ -1,17 +1,38 @@
 import React from 'react'
 
 import TopNavigation from './TopNavigation';
-import { NavLink } from 'react-router-dom';
-
-
-
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Settings() {
+let storeObj=useSelector((store)=>{
+  return store;
+});
+
+let navigate=useNavigate();
+
   let activeLink=(obj)=>{
     if(obj.isActive===true){
-      return ({color:"violet"})
+      return ({color:"blue"})
     }
   }
+  let deleteUserFromServer=async()=>{
+
+    let url=`http://localhost:1234/deleteUser?email=${storeObj.loginDetails.email}`
+ 
+    let reqOptions={
+     method:"DELETE",
+    };
+ 
+ let JSONData=await fetch(url,reqOptions);
+ let JSOData=await JSONData.json();
+ 
+ if(JSOData.status==="Success"){
+     navigate("/");
+ }
+ alert(JSOData.msg);
+ }
+ 
  
   return (
     <div>
@@ -23,8 +44,17 @@ function Settings() {
  <TopNavigation/>
   
   <NavLink style={(obj)=>{return activeLink(obj)
-      }}  to="/editProfile" className="navLink">EditProfile</NavLink>
+      }}  to="/editProfile" className="setLink">EditProfile  ➡️</NavLink>
+      <br></br>
+
+  <NavLink style={(obj)=>{return activeLink(obj)
+      }} className="setLink"
+            onClick={()=>{
+                deleteUserFromServer();
+            }}>Delete User</NavLink>
+          
     </div>
+
   )
 }
 

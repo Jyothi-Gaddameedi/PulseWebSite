@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
 import TopNavigation from './TopNavigation';
-import { IoHome } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
+
 function EditProfile() {
 
   let firstNameInputRef=useRef();
@@ -12,6 +12,7 @@ function EditProfile() {
   let profilePicInputRef=useRef();
   let emailInputRef=useRef();
   let passwordInputRef=useRef();
+  let stateSelectInputRef=useRef();
   let [profilePicURL,setProfilePicURL]=useState("./images/Profile-pic.jpg");
 
   let storeObj=useSelector((store)=>{
@@ -24,10 +25,11 @@ function EditProfile() {
  mobileNumberInputRef.current.value=storeObj.loginDetails.mobileNumber;
  cityInputRef.current.value=storeObj.loginDetails.city;
  emailInputRef.current.value=storeObj.loginDetails.email;
+ stateSelectInputRef.current.value=storeObj.loginDetails.state;
  setProfilePicURL(`http://localhost:1234/${storeObj.loginDetails.profilePic}`)
  },[]);
  
-  let sendSignupDataToServerFormData=async()=>{
+  let sendUpdatedDataToServerFormData=async()=>{
     let dataToSend=new FormData();
         dataToSend.append("firstName",firstNameInputRef.current.value);
         dataToSend.append("lastName",lastNameInputRef.current.value);
@@ -41,32 +43,26 @@ function EditProfile() {
         dataToSend.append("password",passwordInputRef.current.value);
       
     let reqOptions={
-      method:"POST",
+      method:"PUT",
       body:dataToSend,
     };
     
     let JSONData=await fetch("http://localhost:1234/editProfile",reqOptions);
     let JSOData=await JSONData.json();
-  if(JSOData.status==="Failure"){
+  
     alert(JSOData.msg);
-  }else{
-    //navigate("/");
-  }
-    console.log(JSOData);
-  }
+
+    console.log(JSOData); 
+    };
   return (
-    <div className='App'>
+    <div>
       <div className='pulsediv'> 
     <div className='pulsebrn'>
       <h2><strong className='pulse'>Pulse.</strong><strong className='b'>B</strong><strong className='r'>R</strong><strong className='n'>n</strong></h2>
     </div>
-      
-  </div>
-    <TopNavigation/>
-   <div>
-    <NavLink to="/home"><IoHome/> Home</NavLink>
     </div>
-    
+    <NavLink style={{fontSize:"1.6rem" ,textDecoration:"none"}} to="/settings">Back</NavLink>
+    <div className='App'>
  <form className='signupForm'>
       <div>
            <h2>EditProfile</h2>
@@ -84,7 +80,7 @@ function EditProfile() {
         <input ref={cityInputRef} className="login" placeholder="City/Town"/>
       </div>
       <div>
-            <select className='login'>
+            <select type="select" ref={stateSelectInputRef} className='login'>
                 <option>Choose your state</option>
                 <option value="AP">Andhra pradesh</option>
                 <option>Goa</option>
@@ -132,12 +128,13 @@ function EditProfile() {
         <div>
            <button 
            onClick={()=>{
-              sendSignupDataToServerFormData();
+              sendUpdatedDataToServerFormData();
 
            }}
            className='button' type='button'>Update Profile</button>
         </div>
         </form>
+        </div>
     </div>
   )
 }

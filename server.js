@@ -3,7 +3,7 @@ const express=require("express");
 const cors=require("cors");
 const multer=require("multer");
 const app=express();
-
+const jwt=require("jsonwebtoken");
 app.use(cors());
 
 const storage = multer.diskStorage({
@@ -73,19 +73,101 @@ app.post("/signup",upload.single("profilePic"),async(req,res)=>{
   }  
 });
 app.post("/validateLogin",upload.none(),async(req,res)=>{
-  console.log(req.body);
+  //  console.log(req.body);
 let userData=await User.find().and({email:req.body.email}) ;
 
 if(userData.length>0){
  if(req.body.password===userData[0].password){
-   res.json({status:"Success",data:userData})
-  }else{
+       res.json({status:"Success", data:userData});
+}else{
     res.json({status:"Failure",msg:"Invalid password"});
   }
 }else{
 res.json({status:"Failure",msg:"Invalid Username"});
 }
 });
+
+app.put("/editProfile",upload.single("profilePic"),async(req,res)=>{
+  try{ 
+  
+   if(req.body.firstName.length>0){
+    await User.updateMany(
+      {email:req.body.email},
+      {firstName:req.body.firstName,
+      }
+    );
+   }
+   
+   if(req.body.lastName.length>0){
+    await User.updateMany(
+      {email:req.body.email},
+      {
+        lastName:req.body.lastName,
+      }
+    );
+   }
+   if(req.body.mobileNumber.length>0){
+    await User.updateMany(
+      {email:req.body.email},
+      {
+        mobileNumber:req.body.mobileNumber,
+      }
+    );
+   }
+   if(req.body.city.length>0){
+    await User.updateMany(
+      {email:req.body.email},
+      {
+        city:req.body.city,
+      }
+    );
+   }
+  
+   if(req.body.password.length>0){
+    await User.updateMany(
+      {email:req.body.email},
+      {
+        passWord:req.body.password,
+      }
+    );
+   }
+   
+   if(req.file.path.length>0){
+    await User.updateMany(
+      {email:req.body.email},
+      {
+        profilePic:req.file.path,
+      }
+    );
+   }
+   if(req.body.city.length>0){
+    await User.updateMany(
+      {email:req.body.email},
+      {
+        city:req.body.city,
+      }
+    );
+   }
+   
+    res.json({status:"Success",msg:"User details updated successfully"});
+  
+  }catch(err){
+    console.log(err);
+  
+    res.json({status:"Failure",msg:"Unable to updated details"});
+  }
+    
+  });
+  
+  app.delete("/deleteUser",async(req,res)=>{
+  try{
+    await User.deleteMany({email:req.query.email});
+    res.json({status:"Success",msg:"User deleted successfully"});
+  }catch(err){
+    res.json({status:"Failure",msg:"Unable to delete user"});
+  }
+  })
+  
 
 app.listen("1234",()=>{
     console.log("Listening port 1234");

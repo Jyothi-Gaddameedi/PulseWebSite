@@ -8,6 +8,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import Settings from './components/Settings';
 import EditProfile from './components/EditProfile';
+
 function App() {
   return (
     <div>
@@ -18,6 +19,8 @@ function App() {
         <Route path="/home" element={<Home/>}></Route>
         <Route path="/settings" element={<Settings/>}></Route>
         <Route path="/editProfile" element={<EditProfile/>}></Route>
+        <Route path="/">Delete</Route>
+        <Route path="/">Logout</Route>
       </Routes>
       </BrowserRouter>
     </div>

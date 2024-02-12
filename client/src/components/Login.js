@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 function Login() {
@@ -29,11 +29,12 @@ function Login() {
     if(JSOData.status==="Failure"){
       alert(JSOData.msg);  
    }else{
+    localStorage.setItem("token",JSOData.token);
+        
+    console.log(JSOData);
      dispatch({type:"login",data:JSOData.data[0]});
      navigate("/home");
    }
-
-    console.log(JSOData);
   }
   return (
 
@@ -47,32 +48,33 @@ function Login() {
          <div>
          <input className="login" type="password" ref={passwordInputRef} placeholder="Password"/>
          </div>
-         <div>
-            <NavLink>Forgot Password?</NavLink>
-         </div>
           <div>
             <button className="button" type="button"
             onClick={()=>{
-              validateLoginFromServer();
-            }}
+              
+                validateLoginFromServer();
+
+          }}
             >Login</button>
         </div>
-        <div className='link'>
-      <p>Don't have an account?</p>
-      <NavLink style={(obj)=>{return activeLink(obj)
-      }}
-       to="/signup" className="navLink">Create an account</NavLink>
-      </div>
+        <div>
+            <NavLink>Forgot Password?</NavLink>
+           
+         </div>
+         
+      <div>
+      <hr></hr>
+        <p>Don't have an account?</p> 
+          <NavLink style={(obj)=>{return activeLink(obj)
+          }}
+           to="/signup" className="logLink">Sign Up</NavLink>
+          </div>
+          <br></br>
+      
       </form>
 
       
         </div>
-        
-
-
-    
-    
-  
   )
 }
 

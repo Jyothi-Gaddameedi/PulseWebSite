@@ -15,7 +15,6 @@ function Home() {
   let storeObj=useSelector((store)=>{
     return store;
   });
-  console.log(storeObj);
   return (
     <div>
       <div className='pulsediv'> 
